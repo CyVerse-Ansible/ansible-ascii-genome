@@ -1,0 +1,41 @@
+---
+
+- name: Gather OS-specific vars
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}-{{ ansible_distribution_major_version}}.yml"
+    - "{{ ansible_distribution }}.yml"
+
+- name: Install Java
+  package:
+    state: present
+    name: "{{ JAVA }}"
+
+- name: Download zip
+  get_url:
+    url: "https://github.com/dariober/ASCIIGenome/releases/download/v{{ VERSION }}/ASCIIGenome-{{ VERSION }}.zip"
+    dest: "/tmp/ascii-genome.zip"
+
+- name: Unzip the package
+  unarchive:
+    src: "/tmp/ascii-genome.zip"
+    dest: "/tmp"
+    remote_src: yes
+
+- name: Move executable files to path
+  copy:
+    remote_src: yes
+    src: "/tmp/ASCIIGenome-{{ VERSION }}/{{ item }}"
+    dest: "/usr/local/bin/{{ item }}"
+    mode: 0755
+  with_items:
+    - "ASCIIGenome.jar"
+    - "ASCIIGenome"
+
+- name: Remove temporary files
+  file:
+    state: absent
+    path: "{{ item }}"
+  with_items:
+    - "/tmp/ascii-genome.zip"
+    - "/tmp/ASCIIGenome-{{ VERSION }}"
