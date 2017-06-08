@@ -3,7 +3,5 @@
 - name: Playbook to install hotspot tool
   hosts: localhost
   remote_user: root
-  tasks:
-    - package: name=unzip state=present
   roles:
     - ascii-genome-ansible
