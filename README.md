@@ -2,7 +2,7 @@
 
 Installs [ASCIIGenome Browser](https://github.com/dariober/ASCIIGenome)
 
-[![Build Status](https://travis-ci.org/calvinmclean/ascii-genome-ansible.svg?branch=master)](https://travis-ci.org/calvinmclean/ascii-genome-ansible)
+[![Build Status](https://travis-ci.org/CyVerse-Ansible/ascii-genome-ansible.svg?branch=master)](https://travis-ci.org/CyVerse-Ansible/ascii-genome-ansible)
 
 ### Role Variables
 
